@@ -14,6 +14,24 @@
 	<body>
 		<h1>Build Your Reading List</h1>
 		<div>
+			<button id="addBook" >Add Book</button>
+
+			<!-- The Modal -->
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<h2>Add New Book</h2>
+				    Title: <input id="inputTitle" type="text" required><br>
+				    Author: <input id="inputAuthor" type="text" required><br>
+				    Number of Pages: <input id="inputPage" type="number" required><br>
+				    Read: <input id="inputRead" type="checkbox" checked="yes">
+				    <div>
+				    	<button onclick=addBookToLibrary()>Add</button>
+				    	<button id="cancelButton">Cancel</button>
+				    </div>
+				</div>
+
+			</div>
+			
 			<div class="noBook">
 				<p>Your reading list is empty!</p>
 			</div>

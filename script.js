@@ -8,8 +8,20 @@ function Book(title, author, page, read) {
 }
 
 function addBookToLibrary() {
-	myLibrary.push(new Book("sdfds", "dfgdf", "45", true));
+	var title = document.getElementById('inputTitle').value;
+	var author = document.getElementById('inputAuthor').value;
+	var page = document.getElementById('inputPage').value;
+	var read = document.getElementById('inputRead').checked === "yes" ? true : false;
+
 	
+	myLibrary.push(new Book(title, author, page, read));
+	
+	title = '';
+	author = '';
+	page = '';
+	document.getElementById('inputRead').value = '';
+	
+	document.getElementById('myModal').style.display = 'none';
 	localStorage.setItem('library', JSON.stringify(myLibrary));
 	render();
 }
@@ -43,15 +55,33 @@ function render() {
 	function deleteButton(event) {
 		console.log(event);
 		
-		myLibrary = myLibrary.splice(position, 1);
+		myLibrary.splice(event.target.parentNode.index, 1);
 		render();
 		localStorage.setItem('library', JSON.stringify(myLibrary));
 	}
 		
-	document.querySelectorAll('.removeButton').forEach((book) => {
+	document.querySelectorAll('.removeButton > span').forEach((book) => {
 		book.addEventListener('click', event => {
 			deleteButton(event);
 		});
 	});
 }
+
+document.getElementById('addBook').onclick = function() {
+	document.getElementById('myModal').style.display = 'block';
+}
+
+window.onclick = function(event) {
+	if (event.target == document.getElementById('myModal')) {
+        document.getElementById('myModal').style.display = "none";
+    }
+}
+
+document.getElementById('cancelButton').addEventListener('click', function() {
+	document.getElementById('myModal').style.display = 'none';
+});
+
+
+
+
 
