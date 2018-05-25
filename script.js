@@ -12,7 +12,6 @@ function addBookToLibrary() {
 	var author = document.getElementById('inputAuthor').value;
 	var page = document.getElementById('inputPage').value;
 	var read = document.getElementById('inputRead').checked;
-	console.log(document.getElementById('inputRead').checked);
 	
 	myLibrary.push(new Book(title, author, page, read));
 	
@@ -38,13 +37,12 @@ function render() {
 	}
 	
 	document.querySelector('tbody').innerHTML = myLibrary.map((book, i) => {
-		console.log(book.read);
-		return `<tr>
+		return `<tr >
 					<td><cite>${book.title}</cite></td>
 					<td>${book.author}</td>
 					<td>${book.page}</td>
 					<td>
-						<input type="checkbox" ${book.read ? 'checked' : ''}/>
+						<input id='${i}' type="checkbox" class="readBox" ${book.read ? 'checked' : ''}/>
 					</td>
 					<td>
 						<button type="button" class="removeButton">
@@ -55,9 +53,7 @@ function render() {
 	}).sort().join('');
 	
 	function deleteButton(event) {
-		console.log(event);
-		
-		myLibrary.splice(event.target.parentNode.index, 1);
+		myLibrary.splice(event.target.parentNode.id, 1);
 		render();
 		localStorage.setItem('library', JSON.stringify(myLibrary));
 	}
@@ -67,6 +63,19 @@ function render() {
 			deleteButton(event);
 		});
 	});
+	
+	document.querySelectorAll('.readBox').forEach((book) => {
+		book.addEventListener('click', event => {
+			toggleRead(event);
+		});
+	});
+	
+	function toggleRead(event) {
+		console.log(event.target.checked);
+		myLibrary[event.target.id].read = !myLibrary[event.target.id].read;
+		render();
+		localStorage.setItem('library', JSON.stringify(myLibrary));
+	}
 }
 
 document.getElementById('addBook').onclick = function() {
