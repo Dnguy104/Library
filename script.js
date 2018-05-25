@@ -11,15 +11,15 @@ function addBookToLibrary() {
 	var title = document.getElementById('inputTitle').value;
 	var author = document.getElementById('inputAuthor').value;
 	var page = document.getElementById('inputPage').value;
-	var read = document.getElementById('inputRead').checked === "yes" ? true : false;
-
+	var read = document.getElementById('inputRead').checked;
+	console.log(document.getElementById('inputRead').checked);
 	
 	myLibrary.push(new Book(title, author, page, read));
 	
 	title = '';
 	author = '';
 	page = '';
-	document.getElementById('inputRead').value = '';
+	read = '';
 	
 	document.getElementById('myModal').style.display = 'none';
 	localStorage.setItem('library', JSON.stringify(myLibrary));
@@ -37,12 +37,13 @@ function render() {
 	}
 	
 	document.querySelector('tbody').innerHTML = myLibrary.map((book, i) => {
+		console.log(book.read);
 		return `<tr>
 					<td><cite>${book.title}</cite></td>
 					<td>${book.author}</td>
 					<td>${book.page}</td>
 					<td>
-						<input type="checkbox" ${book.read ? 'checked' : ''}">
+						<input type="checkbox" ${book.read ? 'checked' : ''}/>
 					</td>
 					<td>
 						<button type="button" class="removeButton">
@@ -81,6 +82,8 @@ document.getElementById('cancelButton').addEventListener('click', function() {
 	document.getElementById('myModal').style.display = 'none';
 });
 
+
+render();
 
 
 
