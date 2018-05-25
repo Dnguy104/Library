@@ -16,10 +16,11 @@ function addBookToLibrary() {
 	
 	myLibrary.push(new Book(title, author, page, read));
 	
-	title = '';
-	author = '';
-	page = '';
-	read = '';
+	document.getElementById('inputTitle').value = '';
+	document.getElementById('inputAuthor').value = '';
+	document.getElementById('inputPage').value = '';
+	document.getElementById('inputRead').checked = '';
+
 	
 	document.getElementById('myModal').style.display = 'none';
 	localStorage.setItem('library', JSON.stringify(myLibrary));

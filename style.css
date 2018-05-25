@@ -1,7 +1,12 @@
-h1 {
+h1, h2 {
 	font-family: 'Lobster', cursive;
+	text-align: center;
 }
 
+body {
+	margin: 0 25% 0 25%;
+	background-color: #72d0e5;
+}
 
 .noBook {
   background: rgba(250, 250, 250, 0.5);
@@ -30,5 +35,24 @@ h1 {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
 }
+
+tr {
+	text-align: center;
+}
+
+tr > td, tr > th {
+	padding: 7px 0 7px 0;
+}
+
+table tr:nth-child(odd) td{
+	background-color: #9ae3f9;
+	
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
