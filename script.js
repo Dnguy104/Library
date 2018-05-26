@@ -7,12 +7,6 @@ function Book(title, author, page, read) {
 	this.read = read;
 }
 
-Book.prototype.deleteButton = function(event) {
-	this.splice(event.target.parentNode.id, 1);
-	render();
-	localStorage.setItem('library', JSON.stringify(myLibrary));
-}
-
 function addBookToLibrary() {
 	var title = document.getElementById('inputTitle').value;
 	var author = document.getElementById('inputAuthor').value;
@@ -58,6 +52,11 @@ function render() {
 				</tr>`;
 	}).sort().join('');
 	
+	function deleteButton(event) {
+		myLibrary.splice(event.target.parentNode.id, 1);
+		render();
+		localStorage.setItem('library', JSON.stringify(myLibrary));
+	}
 		
 	document.querySelectorAll('.removeButton > span').forEach((book) => {
 		book.addEventListener('click', event => {
@@ -72,7 +71,6 @@ function render() {
 	});
 	
 	function toggleRead(event) {
-		console.log(event.target.checked);
 		myLibrary[event.target.id].read = !myLibrary[event.target.id].read;
 		render();
 		localStorage.setItem('library', JSON.stringify(myLibrary));
